@@ -1,0 +1,36 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f5f6f8; color: #222; }
+.page { max-width: 1200px; margin: 0 auto; padding: 16px; }
+header { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+h1 { margin: 0; font-size: 22px; }
+nav button { padding: 8px 14px; border: 0; background: #e3e6ea; cursor: pointer; border-radius: 6px 6px 0 0; }
+nav button.actif { background: #2b5fd9; color: #fff; }
+.barre { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.bouton, form button { background: #2b5fd9; color: #fff; padding: 8px 14px; border-radius: 6px; cursor: pointer; border: 0; }
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { padding: 6px 8px; border-bottom: 1px solid #e5e7eb; text-align: left; font-size: 14px; }
+.num { text-align: right; white-space: nowrap; }
+.neg { color: #c0392b; } .pos { color: #1e8449; }
+tr.aclasser { background: #fff7e0; }
+tr.categorie { background: #dde6f7; font-weight: 700; }
+tr.total { background: #2b5fd9; color: #fff; font-weight: 700; } tr.total .neg, tr.total .pos { color: #fff; }
+.msg { background: #eef3ff; padding: 8px 12px; border-radius: 6px; }
+td a { display: block; font-size: 13px; }
+.plus { cursor: pointer; color: #2b5fd9; font-weight: 700; font-size: 18px; }
+select, input { padding: 5px; }
+.actions { white-space: nowrap; }
+.actions button { padding: 4px 10px; margin-right: 6px; border: 0; border-radius: 5px; background: #2b5fd9; color: #fff; cursor: pointer; }
+.actions button.danger { background: #c0392b; }
+.petit-texte { font-size: 12px; color: #777; margin-top: 2px; }
+.fond { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: flex; align-items: center; justify-content: center; z-index: 10; }
+.fenetre { background: #fff; border-radius: 10px; padding: 20px 24px; width: 520px; max-width: 95vw; max-height: 90vh; overflow: auto; display: flex; flex-direction: column; gap: 12px; }
+.fenetre h2, .fenetre h3 { margin: 0; }
+.fenetre label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.fenetre select, .fenetre textarea { padding: 8px; font: inherit; }
+.fenetre a { font-size: 14px; }
+.resume { background: #f5f6f8; padding: 8px 12px; border-radius: 6px; margin: 0; font-size: 14px; }
+.aide { color: #777; font-size: 13px; margin: 0; }
+.bouton.petit { align-self: flex-start; font-size: 14px; }
+.msg.erreur { background: #fdecea; color: #922; }
+.boutons { display: flex; justify-content: flex-end; gap: 10px; }
+.boutons button { padding: 8px 16px; border: 0; border-radius: 6px; background: #2b5fd9; color: #fff; cursor: pointer; }
+.boutons button.secondaire { background: #e3e6ea; color: #222; }
