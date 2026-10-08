@@ -119,8 +119,16 @@ public class OperationController {
         String nom = o.get("date_operation") + "_op" + id + "_" + file.getOriginalFilename();
         String chemin;
         try {
-            chemin = nextcloud.envoyer(List.of("Tresorerie", (String) o.get("mandat"), (String) o.get("categorie"),
-                    (String) o.get("classeur")), nom, file.getBytes());
+            chemin = nextcloud.envoyer(
+                    List.of(
+                            (String) o.get("mandat"),
+                            "[3] Trésorerie",
+                            (String) o.get("categorie"),
+                            (String) o.get("classeur")
+                    ),
+                    nom,
+                    file.getBytes()
+            );
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Envoi vers Nextcloud impossible : " + e.getMessage());
         }
