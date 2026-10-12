@@ -1,5 +1,16 @@
 target/
+*.class
+
 node_modules/
 dist/
+
+
 .idea/
-*.yml
+*.iml
+.vscode/
+
+
+.env
+
+*.log
+.DS_Store

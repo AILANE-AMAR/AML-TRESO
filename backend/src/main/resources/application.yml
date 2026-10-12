@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/treso}
+    username: ${DB_USER:treso}
+    password: ${DB_PASSWORD:treso}
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+server:
+  address: 127.0.0.1
+  forward-headers-strategy: native
+  error:
+    include-message: always
+  servlet:
+    session:
+      timeout: 8h
+      cookie:
+        http-only: true
+        same-site: strict
+        secure: ${COOKIE_SECURE:false}
+
+
+nextcloud:
+  url: ${NEXTCLOUD_URL}
+  user: ${NEXTCLOUD_USER}
+  password: ${NEXTCLOUD_PASSWORD}
+  # required-group: ${NEXTCLOUD_REQUIRED_GROUP:Treso}

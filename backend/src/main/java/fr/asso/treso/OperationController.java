@@ -34,11 +34,15 @@ public class OperationController {
 
     @GetMapping("/operations")
     public List<Map<String, Object>> liste(@RequestParam int mandatId,
-                                           @RequestParam(required = false) String mois,      // ex : 2025-11
+                                           @RequestParam(required = false) String mois,
+                                           @RequestParam(required = false) Integer classeurId,
                                            @RequestParam(defaultValue = "false") boolean aClasser) {
         StringBuilder sql = new StringBuilder(
                 "SELECT id, date_operation, libelle, nature, montant, classeur_id , commentaire FROM operation WHERE mandat_id = ?");
         List<Object> p = new ArrayList<>(List.of(mandatId));
+        if (classeurId != null) {
+            sql.append(" AND classeur_id = ?"); p.add(classeurId);
+        }
         if (mois != null && !mois.isBlank()) {
             sql.append(" AND to_char(date_operation,'YYYY-MM') = ?");
             p.add(mois);
@@ -89,12 +93,16 @@ public class OperationController {
         return Map.of("lues", lignes.size(), "ajoutees", ajoutees, "doublonsIgnores", lignes.size() - ajoutees);
     }
 
-    public record Modification(Integer classeurId, String commentaire) {}
+    public record Modification(Integer classeurId, String commentaire, String libelle) {}
 
     @PutMapping("/operations/{id}")
     public void modifier(@PathVariable long id, @RequestBody Modification m) {
-        db.sql("UPDATE operation SET classeur_id = ?, commentaire = ? WHERE id = ?")
-                .params(m.classeurId(), m.commentaire(), id).update();
+        // si le motif envoyé est vide, on garde l'ancien
+        db.sql("""
+            UPDATE operation
+            SET classeur_id = ?, commentaire = ?, libelle = COALESCE(NULLIF(TRIM(?), ''), libelle)
+            WHERE id = ?""")
+                .params(m.classeurId(), m.commentaire(), m.libelle(), id).update();
     }
 
     @DeleteMapping("/operations/{id}")

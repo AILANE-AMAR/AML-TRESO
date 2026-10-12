@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: treso
+      POSTGRES_USER: treso
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-treso}
+    ports: ["5433:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U treso -d treso"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      SERVER_ADDRESS: 0.0.0.0     # dans Docker, le backend doit écouter sur toutes les adresses
+      DB_URL: jdbc:postgresql://db:5432/treso
+      DB_USER: treso
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-treso}
+      NEXTCLOUD_URL: ${NEXTCLOUD_URL}
+      NEXTCLOUD_USER: ${NEXTCLOUD_USER}
+      NEXTCLOUD_PASSWORD: ${NEXTCLOUD_PASSWORD}
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    depends_on: [backend]
+    ports: ["3000:80"]
+    restart: unless-stopped
+
+volumes:
+  pgdata:

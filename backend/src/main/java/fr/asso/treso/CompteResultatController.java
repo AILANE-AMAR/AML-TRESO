@@ -42,8 +42,8 @@ public class CompteResultatController {
             cat.put("charges", ((BigDecimal) cat.get("charges")).add(ch));
             cat.put("produits", ((BigDecimal) cat.get("produits")).add(pr));
             @SuppressWarnings("unchecked") var list = (List<Map<String, Object>>) cat.get("classeurs");
-            list.add(Map.of("nom", r.get("classeur"), "charges", ch, "produits", pr, "balance", ch.add(pr), "nb", r.get("nb")));
-        }
+            list.add(Map.of("id", r.get("classeur_id"), "nom", r.get("classeur"), "charges", ch, "produits", pr,
+                    "balance", ch.add(pr), "nb", r.get("nb")));        }
         BigDecimal chCr = BigDecimal.ZERO, prCr = BigDecimal.ZERO, chHors = BigDecimal.ZERO, prHors = BigDecimal.ZERO;
         for (var cat : cats.values()) {
             cat.put("balance", ((BigDecimal) cat.get("charges")).add((BigDecimal) cat.get("produits")));

@@ -27,7 +27,8 @@ export default function App() {
 
     return (
         <div className="page">
-            <header>
+            <header className="no-print">
+
                 <h1>Trésorerie</h1>
                 <label>Mandat&nbsp;
                     <select value={mandatId ?? ''} onChange={(e) => setMandatId(Number(e.target.value))}>

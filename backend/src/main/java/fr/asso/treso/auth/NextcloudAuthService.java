@@ -54,12 +54,15 @@ public class NextcloudAuthService {
             return Optional.of(new NextcloudUser(id, display));
 
         } catch (HttpClientErrorException e) {
+            System.err.println("NEXTCLOUD STATUT : " + e.getStatusCode() + " " + e.getResponseBodyAsString());
             HttpStatusCode s = e.getStatusCode();
             if (s.value() == 401 || s.value() == 403 || s.value() == 997) return Optional.empty();
             throw new IllegalStateException("Nextcloud a répondu " + s.value(), e);
         } catch (IllegalStateException e) {
             throw e;
         } catch (Exception e) {
+            System.err.println("ERREUR NEXTCLOUD : " + e);
+            e.printStackTrace();
             throw new IllegalStateException("Nextcloud injoignable", e);
         }
     }

@@ -34,3 +34,37 @@ select, input { padding: 5px; }
 .boutons { display: flex; justify-content: flex-end; gap: 10px; }
 .boutons button { padding: 8px 16px; border: 0; border-radius: 6px; background: #2b5fd9; color: #fff; cursor: pointer; }
 .boutons button.secondaire { background: #e3e6ea; color: #222; }
+.fenetre input[type="text"] { padding: 8px; font: inherit; }
+
+/* Rouge pour les négatifs, vert pour les positifs */
+.num.neg { color: #c62828; font-weight: 600; }
+.num.pos { color: #2e7d32; font-weight: 600; }
+td.num { font-variant-numeric: tabular-nums; }
+
+tr.categorie td { background: #eef1f6; font-weight: 700; }
+tr.total td { background: #1f3a5f; color: #fff; font-weight: 700; }
+tr.total td.num.neg { color: #ffb4b4; }
+tr.total td.num.pos { color: #b9f6ca; }
+tr.cliquable { cursor: pointer; }
+tr.cliquable:hover td { background: #f5f8ff; }
+
+/* Menu de téléchargement */
+.menu-dl { position: relative; display: inline-block; }
+.menu-dl-liste {
+    position: absolute; top: 100%; left: 0; z-index: 10; margin-top: 4px;
+    background: #fff; border: 1px solid #ccd3dd; border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15); min-width: 200px; overflow: hidden;
+}
+.menu-dl-liste button {
+    display: block; width: 100%; text-align: left; padding: 10px 14px;
+    border: 0; background: none; cursor: pointer; font-size: 14px;
+}
+.menu-dl-liste button:hover { background: #eef1f6; }
+
+/* PDF : on masque tout ce qui est hors CR / non classé */
+@media print {
+    .no-print, .hors-print { display: none !important; }
+    .titre-impression { display: block; }
+    tr.total td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    tr.categorie td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
